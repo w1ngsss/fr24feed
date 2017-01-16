@@ -19,10 +19,12 @@ RUN apt-get install fr24feed -y
 RUN service fr24feed stop || echo OK
 
 # Put configuration file
-ENV FR24_KEY e4792a5e170b27fb
+ENV FR24_KEY ""
 COPY fr24feed.ini /etc/
 RUN chmod a+rw /etc/fr24feed.ini
-RUN sed -i "s/fr24key=*/fr24key=`echo $FR24_KEY`/g" /etc/fr24feed.ini
 
 # Restart the feeder software
-RUN /etc/init.d/fr24feed restart
+CMD sed -i "s/fr24key=/fr24key=`echo $FR24_KEY`/g" /etc/fr24feed.ini &&\
+    /etc/init.d/fr24feed restart &&\
+    sleep 10 &&\
+    tail -f /var/log/fr24feed.log
