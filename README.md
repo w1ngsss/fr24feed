@@ -1,6 +1,4 @@
-# rpi-fr24feed
-
-This repository is made to build a Docker image of Raspbian with <a href="https://www.flightradar24.com/raspberry-pi">FlightRadar24 software</a> already installed. It is part of the following stack:
+Docker image of Raspbian with FlightRadar24 software already installed. It is part of the following stack:
 
 rpi-rtl-sdr -> rpi-dump1090 -> **rpi-fr24feed**
 
