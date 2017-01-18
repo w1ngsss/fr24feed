@@ -23,6 +23,10 @@ ENV FR24_KEY ""
 COPY fr24feed.ini /etc/
 RUN chmod a+rw /etc/fr24feed.ini
 
+# Use local version of dump1090
+RUN mv /usr/lib/fr24/dump1090 /usr/lib/fr24/dump1090.old
+RUN ln -s /dump1090/dump1090 /usr/lib/fr24/dump1090
+
 # Restart the feeder software
 CMD sed -i "s/fr24key=/fr24key=`echo $FR24_KEY`/g" /etc/fr24feed.ini &&\
     /etc/init.d/fr24feed restart &&\
