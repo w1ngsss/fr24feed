@@ -32,6 +32,3 @@ CMD sed -i "s/fr24key=/fr24key=`echo $FR24_KEY`/g" /etc/fr24feed.ini &&\
     /etc/init.d/fr24feed restart &&\
     sleep 10 &&\
     tail -100f /var/log/fr24feed.log
-
-# just a dummy change
-RUN uname -a
