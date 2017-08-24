@@ -1,4 +1,4 @@
-FROM nicosingh/rpi-dump1090
+FROM nicosingh/rpi-dump1090:latest
 
 MAINTAINER Nicolas Singh <nicolas.singh@gmail.com>
 
@@ -13,7 +13,8 @@ RUN echo 'deb http://repo.feed.flightradar24.com flightradar24 raspberrypi-stabl
 
 # Update APT cache and install feeder software
 RUN apt-get update -y
-RUN apt-get install fr24feed -y
+RUN apt-get install fr24feed -y && \
+  rm -rf /var/lib/apt/lists/*
 
 # Stop older instances if exist
 RUN service fr24feed stop || echo OK
@@ -28,7 +29,7 @@ RUN mv /usr/lib/fr24/dump1090 /usr/lib/fr24/dump1090.old
 RUN ln -s /dump1090/dump1090 /usr/lib/fr24/dump1090
 
 # Restart the feeder software
-CMD sed -i "s/fr24key=/fr24key=`echo $FR24_KEY`/g" /etc/fr24feed.ini &&\
-    /etc/init.d/fr24feed restart &&\
-    sleep 10 &&\
+CMD sed -i "s/fr24key=/fr24key=`echo $FR24_KEY`/g" /etc/fr24feed.ini && \
+    /etc/init.d/fr24feed restart && \
+    sleep 10 && \
     tail -100f /var/log/fr24feed.log
