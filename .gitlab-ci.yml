@@ -1,14 +1,10 @@
 image: nicosingh/rpi-dind:latest
 
 variables:
-  DOCKER_DRIVER: overlay
   GITLAB_REGISTRY: registry.gitlab.com
   GITLAB_IMAGE_NAME: $GITLAB_REGISTRY/nicosingh/rpi-fr24feed
   DOCKERHUB_REGISTRY: docker.io
   DOCKERHUB_IMAGE_NAME: nicosingh/rpi-fr24feed
-
-services:
-  - docker:dind
 
 stages:
   - build-branch
