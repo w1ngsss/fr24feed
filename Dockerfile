@@ -13,7 +13,7 @@ RUN echo 'deb http://repo.feed.flightradar24.com flightradar24 raspberrypi-stabl
 
 # Update APT cache and install feeder software
 RUN apt-get update -y
-RUN apt-get install fr24feed -y && \
+RUN apt-get install fr24feed iputils-ping -y && \
   rm -rf /var/lib/apt/lists/*
 
 # Stop older instances if exist
