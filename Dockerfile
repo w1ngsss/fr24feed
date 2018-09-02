@@ -17,7 +17,7 @@ RUN apt-get install fr24feed iputils-ping -y && \
   rm -rf /var/lib/apt/lists/*
 
 # Put configuration file
-ENV FR24_KEY ""
+ENV FR24_KEY "0123456789ABCDEF"
 COPY fr24feed.ini /etc/
 RUN chmod a+rw /etc/fr24feed.ini
 
@@ -27,6 +27,6 @@ RUN ln -s /dump1090/dump1090 /usr/lib/fr24/dump1090
 # Expose stats port
 EXPOSE 8080
 
-# Restart the feeder software
-CMD sed -i "s/fr24key=/fr24key=`echo $FR24_KEY`/g" /etc/fr24feed.ini && \
-  /usr/bin/fr24feed
+# Entrypoint
+COPY entrypoint.sh /usr/bin/entrypoint.sh
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]
