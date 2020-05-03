@@ -1,6 +1,6 @@
 FROM nicosingh/rpi-dump1090:latest
 
-MAINTAINER Nicolas Singh <nicolas.singh@gmail.com>
+MAINTAINER Malte Borchert <malte.borchert@gmail.com>
 
 # run fr24 rpi installator
 RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 40C430F5
@@ -10,6 +10,7 @@ RUN bash -c "gpg --armor --export 40C430F5 | apt-key add -"
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
 RUN bash -c "grep -v flightradar24 /etc/apt/sources.list.bak > /etc/apt/sources.list"
 RUN bash -c "echo 'deb http://repo.feed.flightradar24.com flightradar24 raspberrypi-stable' >> /etc/apt/sources.list"
+RUN bash -c "echo 'deb http://repo-feed.flightradar24.com flightradar24 raspberrypi-stable' >> /etc/apt/sources.list"
 
 # Update APT cache and install feeder software
 RUN apt-get update -y
