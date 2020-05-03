@@ -3,8 +3,8 @@ FROM nicosingh/rpi-dump1090:latest
 MAINTAINER Malte Borchert <malte.borchert@gmail.com>
 
 # run fr24 rpi installator
-RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 40C430F5
-RUN bash -c "gpg --armor --export 40C430F5 | apt-key add -"
+# RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 40C430F5
+# RUN bash -c "gpg --armor --export 40C430F5 | apt-key add -"
 
 # Add APT repository to the config file, removing older entries if exist
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
